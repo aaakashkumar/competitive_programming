@@ -17,9 +17,14 @@ class Solution:
                 hash_ = []
                 for k in range(j+1, len(nums)):
                     # print(i,j,k)
+
+                    # check if the complement (the last number that should be added)
+                    # has already been found (in the hash)
                     complement = target-(nums[i]+nums[j]+nums[k])
                     if complement in hash_:
                         # print(i,j,k,complement)
+
+                        # sort the numbers so that they can be searched the next time to avoid duplicates
                         temp_quad = sorted([nums[i], nums[j], nums[k], complement])
                         if temp_quad not in quadruplets:
                             quadruplets.append(temp_quad)
