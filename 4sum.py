@@ -10,10 +10,13 @@ class Solution:
         :param target: The target to sum up to
         """
 
+        if nums == []: return []
+
         quadruplets = list()
         nums = sorted(nums)
 
         for i in range(len(nums)-3):
+            if i>0 and nums[i] == nums[i-1]: continue
             for j in range(i+1, len(nums)-2):
 
                 hash_ = []
@@ -32,6 +35,9 @@ class Solution:
         return quadruplets
 
     def test_fourSum(self):
+        """
+        Method to test the code with a few sample cases
+        """
         def inner_sort(arr):
             return sorted([sorted(x) for x in arr])
 
