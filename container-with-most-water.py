@@ -4,15 +4,6 @@
 from typing import List
 
 class Solution:
-    def smallerHeight(self, left_height, right_height):
-        """
-        A method that simply returns the smaller of two numbers
-        :param left_height: The left height in the container
-        :param right_height: The right height in the container
-        :return: the smaller height between left_height and right_height
-        """
-        return left_height if left_height < right_height else right_height
-
     def maxArea(self, height: List[int]) -> int:
         """
         A method to calculate the maximum area as described in the problem statement
@@ -24,7 +15,7 @@ class Solution:
         max_area = -1
         
         while left < right:
-            new_area = (right-left) * self.smallerHeight(height[left], height[right])
+            new_area = (right-left) * min(height[left], height[right])
             if new_area > max_area:
                 max_area = new_area
 
