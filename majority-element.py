@@ -14,7 +14,7 @@ class Solution:
 
         for i in nums:
 
-            if i in num_count:
+            if dict.get(num_count, i):
                 num_count[i] += 1
             else:
                 num_count[i] = 1
