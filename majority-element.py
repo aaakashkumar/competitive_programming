@@ -9,20 +9,18 @@ class Solution:
         Method to calculate the majority element
         :param nums: a list of integers
         """
-        nums = sorted(nums)
+        num_count = dict()
         nums_length = len(nums)
 
-        count = 1
-        i_previous = None
         for i in nums:
-            if count >= nums_length / 2:
-                return i
-            
-            if i != i_previous:
-                count = 1
 
-            count += 1
-            i_previous = i
+            if i in num_count:
+                num_count[i] += 1
+            else:
+                num_count[i] = 1
+
+            if num_count[i] >= nums_length / 2:
+                return i
 
     def testMajorityElement(self):
         """
