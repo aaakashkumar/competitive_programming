@@ -50,12 +50,18 @@ class Solution:
         next_target = next(power_of_two)  # initially set to 2
         current_power_of_two = 1
 
-        for i in range(1, num+1):
+        i = 1
+        while i <= num:
             if i == next_target:
                 # if i equals to any of the powers 2^n where n is a non negative integer
                 # then the number of bits will be 1
                 current_power_of_two = next_target
                 next_target = next(power_of_two)
+
+                if i+len(known_one_counts)-1 <= num:
+                    one_counts += known_one_counts[1:]
+                    i += len(known_one_counts)-1
+                    continue
 
             if i - current_power_of_two+1 <= len(known_one_counts)-1:
                 one_counts.append(known_one_counts[i-current_power_of_two+1])
@@ -64,7 +70,10 @@ class Solution:
                 number_of_ones = self.get_number_of_ones(i)
                 one_counts.append(number_of_ones)
                 known_one_counts.append(number_of_ones)
+
+            i += 1
         
+        # print(one_counts)            
         return one_counts
 
     def testCountBits(self):
