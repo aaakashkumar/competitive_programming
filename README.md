@@ -1,3 +1,3 @@
-# LeetCode Solutions
+# Competitive Programming
 
-This repository contains the solutions to the problems I solve on LeetCode.
+This repository contains solutions to the problems I solve on various coding platforms
