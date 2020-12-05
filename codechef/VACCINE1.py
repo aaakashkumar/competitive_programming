@@ -20,6 +20,9 @@ def get_days_required(d1, v1, d2, v2, p):
         
         days_required = d1 - 1
 
+        if (d2-d1) * v1 >= p:
+            return days_required + math.ceil(p / v1)
+
         days_required += d2-d1
         p -= (d2-d1) * (v1)
 
