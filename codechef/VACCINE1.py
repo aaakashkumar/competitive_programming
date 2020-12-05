@@ -1,4 +1,5 @@
 # https://www.codechef.com/DEC20B/problems/VACCINE1
+# submission: https://www.codechef.com/viewsolution/40051581
 # @author Akash Kumar
 
 import math
