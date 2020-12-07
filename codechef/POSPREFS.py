@@ -1,5 +1,5 @@
 # https://www.codechef.com/DEC20B/problems/POSPREFS
-# submission: https://www.codechef.com/viewsolution/40183918
+# submission: https://www.codechef.com/viewsolution/40184257
 # @author Akash Kumar
 
 def get_postive_prefix_array(n, k):
@@ -26,13 +26,49 @@ def get_postive_prefix_array(n, k):
 
     return sequence
 
+def check_positive_prefixes(n, k, sequence):
+    k_temp = 0
+    for i in range(1, len(sequence)+1):
+        if sum(sequence[:i]) > 0:
+            k_temp += 1
+    
+    return True if k == k_temp else False
 
-# input T
-test_case_count = int(input())
+def test_positive_prefixes():
+    assert check_positive_prefixes(3, 3, get_postive_prefix_array(3, 3))
+    assert check_positive_prefixes(10, 7, get_postive_prefix_array(10, 7))
+    assert check_positive_prefixes(10, 8, get_postive_prefix_array(10, 8))
+    assert check_positive_prefixes(5, 2, get_postive_prefix_array(5, 2))
+    print("All sample test cases ran successfully")
 
-for _ in range(test_case_count):
+def main():
+    """
+    Main driver function for submission
+    """
 
-    # input N and K
-    n, k = map(int, input().split())
+    # input T
+    test_case_count = int(input())
 
-    print(*get_postive_prefix_array(n, k))
+    for _ in range(test_case_count):
+
+        # input N and K
+        n, k = map(int, input().split())
+
+        print(*get_postive_prefix_array(n, k))
+
+def run(mode='submit'):
+    """
+    Function to run the function based on whether to test with 
+    existing sample cases or to take input from the user
+    :param mode: Mode for testing the code, takes either 'submit' or 'test' 
+    """
+
+    if mode == 'submit':
+        main()
+    elif mode=='test':
+        test_positive_prefixes()
+    else:
+        print("Invalid run mode")
+
+
+run('test')
