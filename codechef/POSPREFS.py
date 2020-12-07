@@ -2,14 +2,23 @@
 # @author Akash Kumar
 
 def get_postive_prefix_array(n, k):
-    multiplier = -1 if k % 2 == 0 else 1
-    sequence = list()
+    sequence = list(range(1, n+1))
 
-    for i in range(1, k+1):
-        sequence.append(i*multiplier)
-        multiplier *= -1
+    for index, number in enumerate(sequence):
+        if number % 2 == 0: 
+            sequence[index] = -number
+        
+        else:
+            k -= 1
 
-    sequence += list(-x for x in range(k+1, n+1))
+        if k == n-(index+1) or k == 0:
+            break
+    
+    if k == 0:
+        index += 1
+        while index < n:
+            sequence[index] = -sequence[index]
+            index += 1
 
     return sequence
 
