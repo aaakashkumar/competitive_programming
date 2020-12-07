@@ -1,8 +1,12 @@
 # https://www.codechef.com/DEC20B/problems/POSPREFS
+# submission: https://www.codechef.com/viewsolution/40183918
 # @author Akash Kumar
 
 def get_postive_prefix_array(n, k):
     sequence = list(range(1, n+1))
+
+    if k == n:
+        return sequence
 
     for index, number in enumerate(sequence):
         if number % 2 == 0: 
