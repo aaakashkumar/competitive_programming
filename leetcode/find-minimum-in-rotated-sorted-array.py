@@ -5,12 +5,17 @@ from typing import List
 
 class Solution:
     def findMin(self, nums: List[int]) -> int:
+        """
+        Method to find the minimum number in the rotated list
+        :param nums: list of numbers
+        """
         
-        i = 0
-        j = len(nums)-1
-        mid = (i+j) // 2
-        minimum_number = nums[i] if nums[i] < nums[j] else nums[j]
+        i = 0               # left index
+        j = len(nums)-1     # right index
+        mid = (i+j) // 2    # middle index
+        minimum_number = nums[i] if nums[i] < nums[j] else nums[j]  # stores the minimum value
 
+        # while loop inspired from Binary Search
         while i < j:
             if nums[mid] < nums[i]:
                 minimum_number = nums[mid]
@@ -43,5 +48,4 @@ class Solution:
         print("All test cases ran successfully")
 
 
-# Solution().findMin([11,13,15,17])
 Solution().testFindMin()
