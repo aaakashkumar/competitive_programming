@@ -6,30 +6,27 @@ import unittest
 
 
 def find_second_largest(root_node):
-
-    
     if not root_node.left and not root_node.right:
         raise Exception("BST has only one element")
         
     largest = second_largest = -float('inf')
-    nodes = [(root_node, largest, second_largest)]
+    current_node = root_node
     
     # Find the second largest item in the binary search tree
-    while nodes:
-        node, largest, second_largest = nodes.pop()
-        
-        if node.value > largest:
+    while current_node:
+        if current_node.value > largest:
             second_largest = largest
-            largest = node.value
+            largest = current_node.value
             
-        elif node.value > second_largest:
-            second_largest = node.value
+        elif current_node.value > second_largest:
+            second_largest = current_node.value
             
-        if node.right:
-            nodes.append((node.right, largest, second_largest))
-        elif node.left and not node.right:
-            nodes.append((node.left, largest, second_largest))
-        
+        if current_node.right:
+            current_node = current_node.right
+        elif current_node.left and not current_node.right:
+            current_node = current_node.left
+        else:
+            break
 
     return second_largest
 
