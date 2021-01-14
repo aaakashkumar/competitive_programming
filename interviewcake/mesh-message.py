@@ -1,29 +1,52 @@
+# MeshMessage
+# https://www.interviewcake.com/question/python3/mesh-message?course=fc1&section=trees-graphs
+# @author Akash Kumar
+
 import unittest
 from collections import deque
 
 def get_traversal_path(start_node, end_node, previous_node):
+    """
+    Method to reconstruct the path that was traversed to reach to the end node 
+    using BFS
+
+    :param start_node: The source node from where the traversal will start
+    :param end_node: The destination node to be reached
+    :param previous_node: A dictionary containing the node used to reach another node
+    """
     
     traversal = []
     
     node = end_node
+
+    # backtrack through the previous nodes and collect them in traversal list
     while node != start_node:
         traversal.append(node)
         node = previous_node[node]
     traversal.append(start_node)
     
+    # return in reversed order
     return traversal[::-1]
 
 def get_path(graph, start_node, end_node):
+    """
+    Method to find the shortest path from a start node to an end node in an 
+    unweighted, undirected graph
+
+    :param graph: A dictionary mapping nodes to a list of neighboring nodes
+    :param start_node: The source node from where the traversal will start
+    :param end_node: The destination node to be reached
+    """
 
     if not graph.get(start_node):
         raise Exception("Start node is not present in the graph")
     if not graph.get(end_node):
         raise Exception("End node is not present in the graph")
 
-    # Find the shortest route in the network between the two users
-    nodes = deque([start_node])
-    previous_node = {start_node: None}
+    nodes = deque([start_node])  # deque helps in O(1) inserts and removes
+    previous_node = {start_node: None}  # stores the node used to reach the next node
     
+    # Find the shortest route in the network between the two users
     while nodes:
         current_node = nodes.popleft()
         
@@ -39,7 +62,7 @@ def get_path(graph, start_node, end_node):
             if neighbor_node == end_node:
                 return get_traversal_path(start_node, end_node, previous_node)
     
-    return None
+    return None  # in case a path doesn't exist
 
 
 
