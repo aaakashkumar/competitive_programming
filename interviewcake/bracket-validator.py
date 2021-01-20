@@ -1,3 +1,7 @@
+# Bracket Validator
+# https://www.interviewcake.com/question/python3/bracket-validator?course=fc1&section=queues-stacks
+# @author Akash Kumar
+
 import unittest
 
 
@@ -11,23 +15,29 @@ def is_valid(code):
     if code == "":
         return True
     
-    opening_bracket_map = {
+    closing_to_opening_bracket_map = {
         ')': '(',
         '}': '{',
         ']': '['
     }
+
+    opening_to_closing_bracket_map = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
+    }
     
     for character in code:
         
-        if character in opening_bracket_map:
+        if character in closing_to_opening_bracket_map:
             if len(parenthesis_stack) == 0:
                 return False
-            if opening_bracket_map[character] == parenthesis_stack[-1]:
+            if closing_to_opening_bracket_map[character] == parenthesis_stack[-1]:
                 parenthesis_stack.pop()
             else:
                 return False
             
-        else:
+        elif character in opening_to_closing_bracket_map:
             parenthesis_stack.append(character)
     
     if len(parenthesis_stack) > 0:
@@ -82,6 +92,10 @@ class Test(unittest.TestCase):
 
     def test_empty_string(self):
         result = is_valid('')
+        self.assertTrue(result)
+
+    def test_actual_program(self):
+        result = is_valid('#include <iostream>\nusing namespace std;\n\nint main() {\n  printf("Hello World");\n  return 0;\n}')
         self.assertTrue(result)
 
 
