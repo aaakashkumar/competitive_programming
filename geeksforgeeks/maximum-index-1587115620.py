@@ -9,11 +9,12 @@
 def maxIndexDiff(arr, n): 
     ##Your code here
     
-    descending_from_left = []
-    descending_from_right = []
+    descending_from_left = []	# to store the decreasing items starting from the leftmost index
+    descending_from_right = []	# to store the increasing items from the rightmost index, reversed
     
     i, j = 0, n-1
     
+    # create descending_from_left and descending_from_right lists
     while i < n:
         if not descending_from_left or arr[i] <= descending_from_left[-1][0]:
             descending_from_left.append((arr[i], i))
@@ -30,8 +31,7 @@ def maxIndexDiff(arr, n):
     
     i, j, max_difference = 0, 0, 0
     while i < len(descending_from_left) and j < len(descending_from_right):
-
-	# print(descending_from_right[j][1], descending_from_right[i][1])
+	# compare descending_from_left and descending_from_right to get the maximum difference
 
         if descending_from_left[i][0] <= descending_from_right[j][0]:
             if (descending_from_right[j][1] - descending_from_left[i][1]) > max_difference:
