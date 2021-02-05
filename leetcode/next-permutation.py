@@ -9,14 +9,18 @@ from typing import List
 class Solution:
     
     def reverse_slice(self, arr, start_index, end_index):
+        """
+        Method to reverse a sub-part of a list in place
+        :param arr: The list
+        :param start_index: The first candidate to be swapped
+        :param end_index: The other candidate to be swapped
+        """
         while start_index < end_index:
             arr[start_index], arr[end_index] = \
                 arr[end_index], arr[start_index]
             
             start_index += 1
             end_index -= 1
-            
-        return arr
     
     def nextPermutation(self, nums: List[int]) -> None:
         """
@@ -76,5 +80,6 @@ class Solution:
         assert nums == [1,1,5]
 
         print("All sample test cases ran successfully")
+
 
 Solution().testNextPermutation()
