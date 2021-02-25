@@ -10,11 +10,20 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if root == None:
-            return 0
-
-        left_depth = self.maxDepth(root.left) if root.left else 0
-        right_depth = self.maxDepth(root.right) if root.right else 0
+    def __init__(self):
+        # stores the maximum depth found
+        self.max_depth = 0
         
-        return max(left_depth, right_depth) + 1
+    def maxDepth(self, root: TreeNode) -> int:
+        def findMaxDepth(node, current_depth):
+            if not node:
+                return
+                
+            if not node.left and not node.right:
+                self.max_depth = max(self.max_depth, current_depth)
+                
+            findMaxDepth(node.left, current_depth+1)
+            findMaxDepth(node.right, current_depth+1)
+        
+        findMaxDepth(root, 1)
+        return self.max_depth
