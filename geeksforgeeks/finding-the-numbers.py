@@ -78,7 +78,7 @@ xor all the numbers:
 
 choose one of these set bits (easy to get the rightmost set bit),
 
-> to ge the rightmost bit of x = 2, AND x with it's 2's Compliment
+> to get the rightmost bit of x = 2, AND x with it's 2's Compliment
 
 and divide the list in two, based on whether the numbers have a set bit in the position same as above (in this case, at the 0th place from right):
 
