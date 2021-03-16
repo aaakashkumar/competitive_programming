@@ -14,41 +14,32 @@ class Node:
 '''
 # returns the inorder successor of the Node x in BST (rooted at 'root')
 def inorderSuccessor(root, x):
+    """
+    Function to find the inorder successor of a node `x` in a tree `root`.
     
-    def find_node(node, parent):
-        if node.data == x.data:
-            nonlocal x_node
-            nonlocal parent_of_x_node
-            x_node = node
-            parent_of_x_node = parent
-            
-        else:
-            if x.data > node.data:
-                find_node(node.right, parent)
-            else:
-                find_node(node.left, node)
-    
-    def find_inorder_successor(node):
-        if node.left is None:
-            return node
-        
-        else:
-            return find_inorder_successor(node.left)
-        
-        
-    
-    x_node = None
-    parent_of_x_node = None
-    
-    find_node(root, parent_of_x_node)
-    
-    if x_node.right is None:
-        return parent_of_x_node
-    
-    inroder_successor = find_inorder_successor(x_node.right)
-            
-    return inroder_successor
+    Approach:
+    - if x is greater than or equal to the current node, search in its right subtree
+    - if x is less than the current node
+        - save the current node, because if the right subtree of x is NULL, then the 
+          current node would be the inorder successor, and
+        - search the left subtree
 
+    :param root: The root of the tree
+    :param x: The node whose inorder successor is to be found
+    """
+    
+    parent_that_is_possibly_the_successor = None
+    subtree_root = root
+    
+    while subtree_root:
+        if x.data >= subtree_root.data:
+            subtree_root = subtree_root.right
+        
+        else:
+            parent_that_is_possibly_the_successor = subtree_root
+            subtree_root = subtree_root.left
+            
+    return parent_that_is_possibly_the_successor
 
 #{ 
 #  Driver Code Starts
