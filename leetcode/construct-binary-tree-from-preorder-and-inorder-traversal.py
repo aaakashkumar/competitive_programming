@@ -92,3 +92,16 @@ class Solution:
             root.right = None
 
         return root
+
+"""
+Sample test cases:
+
+[3,9,20,15,7]
+[9,3,15,20,7]
+[1,2]
+[1,2]
+[1,2]
+[2,1]
+[3,2,1,4]
+[1,2,3,4]
+"""
