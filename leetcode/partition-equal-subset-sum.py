@@ -7,7 +7,7 @@
 class Solution(object):
     def canPartition(self, nums):
         """
-        Bruteforce recursive solution for checking if an array and be partitioned into
+        Recursive DP solution for checking if an array and be partitioned into
         equal sum sets
         :type nums: List[int]
         :rtype: bool
@@ -20,9 +20,12 @@ class Solution(object):
             return False
         
         # the total that one subset has to make
-        sum_ /= 2
+        sum_ = int(sum_/2)
+        
+        dp = [[None for i in range(sum_+1)] for j in range(len(nums))]
         
         def canPartitionSubproblem(nums, sum_, index):
+            nonlocal dp
             
             if sum_ == 0:
                 return True
@@ -30,14 +33,18 @@ class Solution(object):
             if sum_ < 0 or index >= len(nums):
                 return False
             
-            if nums[index] <= sum_:
-                can_partition = canPartitionSubproblem(nums, sum_-nums[index], index+1)
-                if can_partition:
-                    return True
+            if dp[index][sum_] is None:
+                if nums[index] <= sum_:
+                    can_partition_taking_current = canPartitionSubproblem(nums, sum_-nums[index], index+1)
+                    if can_partition_taking_current:
+                        return True
+                    dp[index][sum_] = can_partition_taking_current
                 
-            return canPartitionSubproblem(nums, sum_, index+1)
+                dp[index][sum_] = canPartitionSubproblem(nums, sum_, index+1)
+            
+            return dp[index][sum_]
         
-        return canPartitionSubproblem(nums, sum_, 0)
+        return True if canPartitionSubproblem(nums, sum_, 0) else False
 
     def test_canPartition(self):
         """
@@ -49,17 +56,7 @@ class Solution(object):
         assert self.canPartition([2, 3, 4, 6]) == False
         assert self.canPartition([1,5,11,5]) == True
         assert self.canPartition([1,2,3,5]) == False
-
-        # print(self.canPartition([100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
-        # 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,99,97]))
+        assert self.canPartition([100]*198 + [99, 97]) == False
 
         print("Sample test cases ran successfully")
 
